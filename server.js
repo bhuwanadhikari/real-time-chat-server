@@ -7,7 +7,7 @@ const PORT = process.env.PORT || 3231
 const SocketManager = require('./manageSocket');
 
 
-const db = require('./config/keys').MONGO_URI;
+const db = require('./configuration/keys').MONGO_URI;
 mongoose
 	.connect(db, { useNewUrlParser: true })
 	.then(() => console.log("Connected to the mongoose from rtServer"))
