@@ -1,4 +1,4 @@
-const io = require('./rtserver.js').io;
+const io = require('./server.js').io;
 const Message = require('./models/Message');
 
 
