@@ -1,4 +1,4 @@
-const io = require('./server.js').io;
+const io = require('./rtserver.js').io;
 const Message = require('./models/Message');
 
 
@@ -16,8 +16,13 @@ module.exports = function (socket) {
         if (riders[realLocation.to]) {
             riders[realLocation.to].socket.emit('GET_HIS_LOCATION', {lat: realLocation.realLocation.lat, lng: realLocation.realLocation.lng});
         } else {
-            console.log("The partner is offline to send my Location");
+            console.log("The partner is offline");
+            socket.emit('HIS_STATUS', 'Offline');
         }
+    })
+
+    socket.on('GO_OFFLINE', ({me, him}) => {
+        console.log("Me is:", me, 'him is ', him);
     })
 
     socket.on('SEND_MESSAGE', (message) => {
@@ -32,7 +37,7 @@ module.exports = function (socket) {
                 if (riders[message.to]) {
                     riders[message.to].socket.emit('GET_MESSAGE', message);
                 } else {
-                    console.log("the user is offline to send");
+                    console.log("the user is offline");
                 }
             }).catch((err) => {
                 console.log("Error in saving message", err);

@@ -2,15 +2,15 @@ var app = require('http').createServer();
 var io = module.exports.io = require('socket.io')(app);
 const mongoose = require('mongoose');
 
-const PORT = process.env.PORT || 8080;
+const PORT = process.env.PORT || 3231
 
 const SocketManager = require('./manageSocket');
 
 
-const db = require('./configuration/keys').MONGO_URI;
+const db = require('./config/keys').MONGO_URI;
 mongoose
 	.connect(db, { useNewUrlParser: true })
-	.then(() => console.log("Connected to the mongoose from real time server"))
+	.then(() => console.log("Connected to the mongoose from rtServer"))
 	.catch(err => console.log(err));
 
 
